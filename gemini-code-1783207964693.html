@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEGM AI OS V3 | منصة الذكاء الاصطناعي المستقبلية المتكاملة</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Tajawal:wght@300;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-theme">
+
+    <!-- طبقات الخلفية السينمائية ثلاثية الأبعاد -->
+    <div id="space-layer"></div>
+    <div id="particles-container"></div>
+    <div id="glow-layer"></div>
+
+    <!-- 1. Landing Page View -->
+    <section id="landing-page" class="view-section active">
+        <nav class="glass-navbar">
+            <div class="logo-area">
+                <div class="brand-logo"><i class="fa-solid fa-brain-circuit neon-icon"></i></div>
+                <span class="brand-name">NEGM <span class="purple-text">AI OS</span></span>
+            </div>
+            <div class="nav-buttons">
+                <button class="glass-btn" onclick="switchView('login-page')">تسجيل الدخول</button>
+                <button class="primary-neon-btn px-sm" onclick="switchView('register-page')">ابدأ مجاناً</button>
+            </div>
+        </nav>
+
+        <div class="hero-container">
+            <h1 class="hero-title animate-glow">نظام تشغيل المستقبل <br><span class="gradient-text">بين يديك الآن</span></h1>
+            <p class="hero-subtitle">المنصة السحابية الفائقة المدمجة بـ 17+ أداة فوق ذكية: شات، صور، فيديو، تحليلات، وأكواد برمجية في واجهة سينمائية واحدة.</p>
+            <div class="hero-cta-group">
+                <button class="primary-neon-btn" onclick="switchView('register-page')">إنشاء حساب ذكي <i class="fa-solid fa-arrow-left"></i></button>
+                <button class="secondary-btn" onclick="toggleModal('terms-modal')">الشروط والسياسات</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Register Page View -->
+    <section id="register-page" class="view-section">
+        <div class="auth-card glass-panel">
+            <h3>إنشاء حساب نظام تشغيل جديد</h3>
+            <p class="auth-desc">انضم إلى مجتمع المستقبل الفوق ذكي</p>
+            <form id="register-form" onsubmit="handleRegister(event)">
+                <div class="avatar-upload-wrapper">
+                    <label for="avatar-input" class="avatar-label">
+                        <div class="avatar-preview" id="avatar-display">
+                            <i class="fa-solid fa-camera"></i>
+                        </div>
+                    </label>
+                    <input type="file" id="avatar-input" accept="image/*" onchange="previewAvatar(event)" style="display:none;">
+                    <span>صورة بروفايلك (اختياري)</span>
+                </div>
+                <div class="input-group">
+                    <i class="fa-solid fa-user"></i>
+                    <input type="text" id="reg-username" placeholder="اسم المستخدم بالكامل" required>
+                </div>
+                <div class="input-group">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" id="reg-password" placeholder="كلمة المرور القوية" required>
+                </div>
+                <div class="terms-check">
+                    <input type="checkbox" id="agree-terms" required>
+                    <label for="agree-terms">أوافق على كافة البنود والسياسات</label>
+                </div>
+                <button type="submit" class="primary-neon-btn w-100">توليد الهوية الذكية</button>
+            </form>
+            <p class="switch-auth-text">تمتلك كود حساب بالفعل؟ <span onclick="switchView('login-page')">سجل دخولك من هنا</span></p>
+        </div>
+    </section>
+
+    <!-- 3. Login Page View -->
+    <section id="login-page" class="view-section">
+        <div class="auth-card glass-panel">
+            <h3>تسجيل الدخول للنظام</h3>
+            <div class="input-group">
+                <i class="fa-solid fa-fingerprint"></i>
+                <input type="text" id="login-identifier" placeholder="اسم المستخدم أو كود الحساب (مثل NG4921)" required>
+            </div>
+            <div class="input-group">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id="login-password" placeholder="كلمة المرور" required>
+            </div>
+            <button class="primary-neon-btn w-100" onclick="handleLogin()">تحقق ودخول آمن</button>
+            <div class="auth-footers">
+                <span class="link-span" onclick="switchView('forgot-page')">نسيت تفاصيل حسابك؟</span>
+                <span class="link-span" onclick="switchView('register-page')">إنشاء حساب</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Forgot Password View -->
+    <section id="forgot-page" class="view-section">
+        <div class="auth-card glass-panel">
+            <h3>استعادة الهوية الرقمية</h3>
+            <p class="auth-desc">أدخل بياناتك بدقة لتعديل كلمة مرورك فورا</p>
+            <div class="input-group">
+                <i class="fa-solid fa-user"></i>
+                <input type="text" id="forgot-username" placeholder="اسم المستخدم" required>
+            </div>
+            <div class="input-group">
+                <i class="fa-solid fa-hashtag"></i>
+                <input type="text" id="forgot-uid" placeholder="كود الحساب الفريد (Login Code)" required>
+            </div>
+            <div class="input-group">
+                <i class="fa-solid fa-key"></i>
+                <input type="password" id="forgot-new-password" placeholder="كلمة المرور الجديدة" required>
+            </div>
+            <button class="primary-neon-btn w-100" onclick="handleResetPassword()">تحديث ميكانيكية الدخول</button>
+            <p class="switch-auth-text" onclick="switchView('login-page')">تذكرت البيانات؟ عد للخلف</p>
+        </div>
+    </section>
+
+    <!-- 5. User Dashboard & Core App Layer View -->
+    <section id="user-dashboard" class="view-section">
+        <div class="dashboard-layout">
+            <aside class="app-sidebar glass-panel">
+                <div class="user-profile-section">
+                    <div class="avatar-ring">
+                        <img src="" id="user-nav-avatar" class="user-avatar-img" alt="Avatar">
+                    </div>
+                    <div class="user-info">
+                        <h4 id="user-nav-name">تحميل النظام...</h4>
+                        <div class="flex-tags">
+                            <span id="user-nav-uid" class="uid-tag">#000000</span>
+                            <span id="user-nav-plan" class="plan-badge free">Free</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="stats-mini-bar">
+                    <div class="mini-stat"><i class="fa-solid fa-bolt text-blue"></i> النقاط المتبقية: <span id="user-points-val">300</span></div>
+                </div>
+                <hr class="divider">
+                <ul class="sidebar-menu">
+                    <li class="active" onclick="switchTab('chat-ai')"><i class="fa-solid fa-comments"></i> 💬 شات AI الذكي</li>
+                    <li onclick="switchTab('image-gen')"><i class="fa-solid fa-palette"></i> 🎨 استوديو الصور</li>
+                    <li onclick="switchTab('video-gen')"><i class="fa-solid fa-video"></i> 🎥 توليد الفيديو</li>
+                    <li onclick="switchTab('tts')"><i class="fa-solid fa-volume-high"></i> 🎙️ نص إلى صوت</li>
+                    <li onclick="switchTab('stt')"><i class="fa-solid fa-microphone"></i> 🎤 صوت إلى نص</li>
+                    <li onclick="switchTab('pdf-sum')"><i class="fa-solid fa-file-pdf"></i> 📄 تلخيص المستندات</li>
+                    <li onclick="switchTab('translate')"><i class="fa-solid fa-language"></i> 🌍 ترجمة فورية</li>
+                    <li onclick="switchTab('code-ai')"><i class="fa-solid fa-code"></i> 💻 المساعد البرمجي</li>
+                    <li onclick="switchTab('homework')"><i class="fa-solid fa-book-open"></i> 📚 حل الواجبات</li>
+                    <li onclick="switchTab('file-analysis')"><i class="fa-solid fa-chart-pie"></i> 📊 تحليل الملفات</li>
+                    <li onclick="switchTab('assistant')"><i class="fa-solid fa-user-astronaut"></i> 🧠 المستشار الشخصي</li>
+                    <li onclick="switchTab('tasks')"><i class="fa-solid fa-calendar-check"></i> 📅 جدولة المهام</li>
+                    <li onclick="switchTab('cv-writer')"><i class="fa-solid fa-briefcase"></i> 💼 منشئ السير الذاتية</li>
+                    <li onclick="switchTab('email-writer')"><i class="fa-solid fa-envelope-open-text"></i> ✉️ صياغة الرسائل</li>
+                    <li onclick="switchTab('social-posts')"><i class="fa-solid fa-share-nodes"></i> 📱 كاتب المحتوى الرقمي</li>
+                    <li onclick="switchTab('article-writer')"><i class="fa-solid fa-newspaper"></i> 📰 مقالات متكاملة</li>
+                    <li onclick="switchTab('data-analysis')"><i class="fa-solid fa-chart-line"></i> 📈 تحليل البيانات المعقدة</li>
+                </ul>
+                <div class="sidebar-footer">
+                    <button class="icon-btn" onclick="switchView('owner-os-page')"><i class="fa-solid fa-shield-halved"></i></button>
+                    <button class="logout-btn" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> خروج</button>
+                </div>
+            </aside>
+
+            <main class="workspace-area glass-panel">
+                <!-- Chat View Module -->
+                <div id="chat-ai" class="tab-content active-tab">
+                    <div class="chat-control-top">
+                        <span class="chat-title">💡 مُساعد NEGM الفوق ذكي</span>
+                        <select id="ai-model-selector" class="model-select-dropdown">
+                            <option value="deepseek">DeepSeek R1</option>
+                            <option value="gpt4">ChatGPT-4o</option>
+                            <option value="claude">Claude 3.5 Sonnet</option>
+                            <option value="gemini">Gemini 1.5 Pro</option>
+                        </select>
+                    </div>
+                    <div class="chat-messages" id="chat-box"></div>
+                    <div class="chat-input-wrapper">
+                        <input type="text" id="chat-input-field" placeholder="اسأل نظام التشغيل أي شيء...">
+                        <button onclick="sendChatMessage()"><i class="fa-solid fa-paper-plane"></i></button>
+                    </div>
+                </div>
+
+                <!-- باقي الـ 17 ميزة مشروحة برمجياً وهيكلياً لمساحات العمل -->
+                <div id="image-gen" class="tab-content">
+                    <div class="workspace-header">🎨 استوديو توليد الصور السريالية</div>
+                    <div class="input-panel-glass">
+                        <input type="text" id="img-prompt" placeholder="اصنع صورة لمدينة مستقبلية بأسلوب السايبربانك...">
+                        <button class="primary-neon-btn" onclick="deductPointsAction(25, 'توليد صورة سريالية')">توليد الآن</button>
+                    </div>
+                </div>
+                <!-- بقية النوافذ ممثلة بنفس الهيكلية الديناميكية -->
+                <div id="video-gen" class="tab-content"><div class="workspace-header">🎥 محرك تحويل النص إلى فيديو سينمائي</div></div>
+                <div id="tts" class="tab-content"><div class="workspace-header">🎙️ تحويل النصوص إلى مقاطع صوتية واقعية</div></div>
+                <div id="stt" class="tab-content"><div class="workspace-header">🎤 تحويل التسجيلات الصوتية لنصوص مكتوبة</div></div>
+                <div id="pdf-sum" class="tab-content"><div class="workspace-header">📄 ميكانيكية قراءة وتلخيص ملفات PDF والكتب</div></div>
+                <div id="translate" class="tab-content"><div class="workspace-header">🌍 مترجم لغوي فوري فائق الدقة</div></div>
+                <div id="code-ai" class="tab-content"><div class="workspace-header">💻 بيئة ومساعد كتابة الأكواد وتصحيح الأخطاء</div></div>
+                <div id="homework" class="tab-content"><div class="workspace-header">📚 مساعد حل الواجبات الأكاديمية والمسائل المعقدة</div></div>
+                <div id="file-analysis" class="tab-content"><div class="workspace-header">📊 مستعرض وتحليل وثائق البيانات الذكية</div></div>
+                <div id="assistant" class="tab-content"><div class="workspace-header">🧠 جلسات التوجيه والاستشارة الشخصية المخصصة</div></div>
+                <div id="tasks" class="tab-content"><div class="workspace-header">📅 نظام جدولة ومتابعة المهام الرقمية اليومية</div></div>
+                <div id="cv-writer" class="tab-content"><div class="workspace-header">💼 صياغة وبناء السير الذاتية بمقاييس ATS</div></div>
+                <div id="email-writer" class="tab-content"><div class="workspace-header">✉️ كاتب الرسائل البريدية المهنية والمراسلات الإدارية</div></div>
+                <div id="social-posts" class="tab-content"><div class="workspace-header">📱 مهندس محتوى شبكات التواصل الاجتماعي والإعلانات</div></div>
+                <div id="article-writer" class="tab-content"><div class="workspace-header">📰 توليد مقالات مطولة متوافقة مع محركات البحث SEO</div></div>
+                <div id="data-analysis" class="tab-content"><div class="workspace-header">📈 تحليل الرسوم البيانية والجداول الإحصائية الضخمة</div></div>
+            </main>
+        </div>
+    </section>
+
+    <!-- 6. Owner Main Operating System View (admin.html integrated) -->
+    <section id="owner-os-page" class="view-section">
+        <div class="os-container">
+            <aside class="os-sidebar">
+                <div class="os-brand"><i class="fa-solid fa-shield-cat text-purple"></i> NEGM OS Control</div>
+                <ul class="os-menu">
+                    <li class="active" onclick="switchOsTab('os-main')"><i class="fa-solid fa-chart-simple"></i> لوحة التحكم الرئيسية</li>
+                    <li onclick="switchOsTab('os-users')"><i class="fa-solid fa-users"></i> التحكم بالمستخدمين</li>
+                    <li onclick="switchOsTab('os-telegram-tab')"><i class="fa-solid fa-robot"></i> اتصالات البوت والسجلات</li>
+                </ul>
+                <div class="os-sidebar-bottom">
+                    <button class="secondary-btn w-100" onclick="switchView('user-dashboard')">العودة للواجهة الرئيسية</button>
+                </div>
+            </aside>
+
+            <main class="os-workspace">
+                <header class="os-header">
+                    <div class="search-bar-os"><i class="fa-solid fa-magnifying-glass"></i> <input type="text" placeholder="فحص شامل لوحدات النظام..."></div>
+                    <div class="os-header-actions">
+                        <i class="fa-solid fa-bell notification-badge"></i>
+                        <div class="online-indicator-node">متصل كمالك للنظام</div>
+                    </div>
+                </header>
+
+                <div id="os-main" class="os-tab-content active-os-tab">
+                    <div class="stats-grid">
+                        <div class="stat-card glass-panel"><span class="title">إجمالي الحسابات</span><h2 id="m-users">1,402</h2></div>
+                        <div class="stat-card glass-panel dynamic"><span class="title">أجهزة نشطة حالياً</span><h2 id="m-online" class="neon-blue-text">32</h2></div>
+                        <div class="stat-card glass-panel"><span class="title">الرسائل الممررة اليوم</span><h2 id="m-chats">8,194</h2></div>
+                        <div class="stat-card glass-panel"><span class="title">استهلاك خوادم الخوارزمية</span><h2 id="m-cpu">14%</h2></div>
+                    </div>
+                    <div class="charts-container glass-panel">
+                        <canvas id="osMainChart" height="100"></canvas>
+                    </div>
+                </div>
+
+                <div id="os-users" class="os-tab-content">
+                    <div class="glass-panel table-wrapper">
+                        <h3>قاعدة بيانات الحسابات والمراقبة المباشرة</h3>
+                        <table class="custom-table">
+                            <thead>
+                                <tr>
+                                    <th>الملف</th>
+                                    <th>كود الحساب</th>
+                                    <th>الدولة</th>
+                                    <th>الجهاز والنظام</th>
+                                    <th>الرصيد</th>
+                                    <th>الإجراء الحاسم</th>
+                                </tr>
+                            </thead>
+                            <tbody id="users-table-body">
+                                <!-- تملأ عبر الـ JS ديناميكياً مع بيانات الأجهزة الفورية -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="os-telegram-tab" class="os-tab-content">
+                    <div class="glass-panel text-right p-md">
+                        <h3>إعدادات خادم وتتبع تلجرام الفوري</h3>
+                        <p class="text-muted">جميع العمليات وسجلات الدخول والتحركات يتم بثها وإدارتها عبر محدد التتبع التالي:</p>
+                        <div class="config-grid-box">
+                            <div class="input-group"><input type="text" id="tg-bot-token-input" placeholder="Telegram Bot Token"></div>
+                            <div class="input-group"><input type="text" id="tg-chat-id-input" placeholder="Telegram Admin Chat ID"></div>
+                            <button class="primary-neon-btn" onclick="saveTelegramCredentials()">حفظ وتحديث الربط السحابي</button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </section>
+
+    <!-- النوافذ المنبثقة الإجبارية (Modals) -->
+    <div id="uid-modal" class="modal-overlay">
+        <div class="modal-card glass-panel pulse-border">
+            <i class="fa-solid fa-shield-cat large-icon animation-bounce"></i>
+            <h2>تم إنشاء حساب نظام تشغيلك!</h2>
+            <p>كود الدخول المباشر والفريد الخاص بحسابك (Login Code) هو:</p>
+            <div class="uid-display-box" id="generated-uid-box">000000</div>
+            <p class="text-muted text-sm">احفظ هذا الكود في مكان آمن، ستحتاجه لتسجيل الدخول الفوري وربط التلجرام.</p>
+            <button class="primary-neon-btn" onclick="closeUidModalAndGo()">نسخت الكود، ابدأ تشغيل المنصة</button>
+        </div>
+    </div>
+
+    <div id="terms-modal" class="modal-overlay">
+        <div class="modal-card glass-panel">
+            <h2>السياسات الأمنية لـ NEGM AI OS</h2>
+            <div class="terms-body text-right">
+                <p>1. يحظر نهائياً تمرير برومبتات استغلال أو توليد أكواد لملفات خبيثة وضارة.</p>
+                <p>2. حماية بيانات حسابك هي مسؤوليتك الكاملة عبر كود الدخول الخاص بك.</p>
+                <p>3. يمتلك المالك الصلاحية المطلقة لحظر الحسابات التي تتجاوز طلبات خوادم المنصة.</p>
+            </div>
+            <button class="secondary-btn" onclick="toggleModal('terms-modal')">إغلاق وتأكيد القراءة</button>
+        </div>
+    </div>
+
+</body>
+</html>
